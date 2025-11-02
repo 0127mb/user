@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mijoz Ma'lumotlari</title> <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+
+        body {
+            background:  rgb(62, 62, 139)
+ 
+        }
+
+        .glass-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 40px;
+            width: 350px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .glass-form h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 25px;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+
+        .glass-form input,
+        .glass-form select {
+            width: 100%;
+            padding: 12px 15px;
+            margin: 10px 0;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            color: #fff;
+            font-size: 15px;
+            transition: 0.3s ease;
+        }
+
+        .glass-form input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .glass-form input:focus,
+        .glass-form select:focus {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .glass-form button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            color: #fff;
+            font-weight: 600;
+            font-size: 16px;
+            margin-top: 15px;
+            cursor: pointer;
+            transition: 0.3s ease;
+        }
+
+        .glass-form button:hover {
+            transform: scale(1.05);
+            background: linear-gradient(90deg, #0072ff, #00c6ff);
+        }
+
+        option {
+            color: #000;
+        }
+
+        .my {
+    /* width: 700px; */
+      display: flex;
+      flex-flow: 1;;
+            align-items: center;
+            justify-content: center;
+         margin-top: 80px;
+            margin-right: 20px;
+        }
+     
+    </style>
+</head>
+
+<body>
+    <header>
+        <img src="./1.jpg" alt="" class="img">
+        <div class="info">  <img src="./warning-icon-24.png" alt="">  Iltimos malumotlarni barjasini Toldiring </div>
+    </header>
+    <div class="my">
+        <div class="glass-form">
+            <h2>Malumotlaringizni yozing</h2>
+            <input type="text" id="ism" placeholder="Ismingiz">
+            <input type="text" id="familiya" placeholder="Familiyangiz">
+
+
+            <select id="viloyat">
+                <option value="" disabled selected>Viloyatingizni tanlang</option>
+                <option>Toshkent</option>
+                <option>Andijon</option>
+                <option>Farg‘ona</option>
+                <option>Namangan</option>
+                <option>Samarqand</option>
+                <option>Buxoro</option>
+                <option>Qashqadaryo</option>
+                <option>Surxondaryo</option>
+                <option>Jizzax</option>
+                <option>Sirdaryo</option>
+                <option>Navoiy</option>
+                <option>Xorazm</option>
+                <option>Qoraqalpog‘iston</option>
+            </select>
+
+            <input type="text" id="telefon" placeholder="Telefon raqamingiz (+998...)">
+            <button id="sendBtn">Yuborish</button>
+        </div>
+
+    </div>
+    <script>
+        document.getElementById('sendBtn').addEventListener('click', () => {
+            let ism = document.getElementById('ism').value;
+            let familiya = document.getElementById('familiya').value;
+            let viloyat = document.getElementById('viloyat').value;
+            let telefon = document.getElementById('telefon').value;
+            let info = document.querySelector('.info')
+
+            if (!ism || !familiya || !viloyat || !telefon) {
+info.style.display = 'flex'
+setTimeout(()=>{
+   
+info.style.display = 'none'
+
+},  3000)
+info.addEventListener('click',()=>{
+    info.style.display = 'none'
+})
+   
+                return;
+            }
+if (telfon.startsWith("+998")) {
+  console.log("O'zbekiston raqami ✅");
+} else {
+  console.log("Boshqa raqam ❌");
+}
+            fetch("https://6907679fb1879c890ed9ace8.mockapi.io/user/api/usersapi", { // <-- o'z API linkingizni yozing
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    ism: ism,
+                    familiya: familiya,
+                    viloyat: viloyat,
+                    telefon: telefon
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    alert("Ma'lumot yuborildi ✅");
+                    console.log("Yangi mijoz:", data);
+                })
+                .catch(err => console.error("Xatolik:", err));
+        });
+    </script>
+
+</body>
+
+</html>
